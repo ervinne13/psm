@@ -1,10 +1,13 @@
 
 class PaginatedSelectViewPresenter {
 
-    constructor(url) {
+    constructor($field, url) {
         this.url = url;
         this.idField = "id";
         this.textField = "text";
+
+        this.renderText = null;
+
         this.ajaxParams = {};
     }
 
@@ -42,26 +45,31 @@ class PaginatedSelectViewPresenter {
                 data: function (params) {
                     return self.getCompeleteParams(params);
                 },
-                processResults: function (data, params) {
+                processResults: function (results, params) {
                     // parse the results into the format expected by Select2
                     // since we are using custom formatting functions we do not need to
                     // alter the remote JSON data, except to indicate that infinite
                     // scrolling can be used
                     params.page = params.page || 1;
                     var select2Data = [];
-                    for (var i in data.data) {
-                        data.data[i].id = data.data[i][self.idField];
-                        data.data[i].text = data.data[i][self.textField];
+                    for (var i in results.data) {
+                        results.data[i].id = results.data[i][self.idField];
 
-                        console.log(data.data[i]);
+                        if (typeof self.renderText === "function") {
+                            results.data[i].text = self.renderText(results.data[i]);
+                        } else {
+                            results.data[i].text = results.data[i][self.textField];
+                        }
 
-                        select2Data.push(data.data[i]);
+                        console.log(results.data[i]);
+
+                        select2Data.push(results.data[i]);
                     }
 
                     return {
                         results: select2Data,
                         pagination: {
-                            more: (params.page * 15) < data.total
+                            more: (params.page * 15) < results.total
                         }
                     };
                 },
