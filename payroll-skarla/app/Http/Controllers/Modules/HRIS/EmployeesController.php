@@ -22,6 +22,26 @@ use function view;
 
 class EmployeesController extends Controller {
 
+    //
+    /**     * ******************************************************** */
+    // <editor-fold defaultstate="collapsed" desc="API">
+
+    public function getPaginatedJSON(Request $request) {
+
+        $filterTerm = trim($request->q);
+
+        $employees = Employee::with('position')
+                ->search($filterTerm)
+                ->paginate(15);
+
+        return \Response::json($employees);
+    }
+
+    // </editor-fold>
+
+    /**     * ******************************************************** */
+    // <editor-fold defaultstate="collapsed" desc="REST Methods">
+
     /**
      * Display a listing of the resource.
      *
@@ -152,6 +172,11 @@ class EmployeesController extends Controller {
         }
     }
 
+    // </editor-fold>
+
+    /**     * ******************************************************** */
+    // <editor-fold defaultstate="collapsed" desc="Local Methods">
+
     protected function getEmployee($employeeCode = null) {
         if ($employeeCode) {
             $employee = Employee::
@@ -190,4 +215,5 @@ class EmployeesController extends Controller {
         return $viewData;
     }
 
+    // </editor-fold>   
 }

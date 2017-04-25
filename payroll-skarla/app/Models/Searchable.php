@@ -14,14 +14,14 @@ namespace App\Models;
  */
 trait Searchable {
 
-    protected $searchable = [];
-
     public function scopeSearch($query, $term) {
-        for ($i = 0; $i < count($this->searchable); $i ++) {
-            if ($i == 0) {
-                $query = $query->where($this->searchable[$i], 'like', "%{$term}%");
-            } else {
-                $query = $query->orWhere($this->searchable[$i], 'like', "%{$term}%");
+        if (isset($this->searchable)) {
+            for ($i = 0; $i < count($this->searchable); $i ++) {
+                if ($i == 0) {
+                    $query = $query->where($this->searchable[$i], 'ilike', "%{$term}%");
+                } else {
+                    $query = $query->orWhere($this->searchable[$i], 'ilike', "%{$term}%");
+                }
             }
         }
 

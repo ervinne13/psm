@@ -186,10 +186,13 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        App\Providers\Payroll\PayrollProcessorServiceProvider::class,
+        
         /*
          * 3rd Party Service Providers...
          */
-        Yajra\Datatables\DatatablesServiceProvider::class,       
+        Yajra\Datatables\DatatablesServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
     ],
 
     /*
@@ -240,6 +243,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         //  Third Party
         'Datatables'   => Yajra\Datatables\Datatables::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
     ],
 
 ];

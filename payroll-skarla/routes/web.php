@@ -37,6 +37,12 @@ Route::group(['prefix' => 'master-files', 'namespace' => 'Modules\MasterFiles', 
 
     Route::get('companies/datatable', 'CompaniesController@datatable');
     Route::resource('companies', 'CompaniesController');
+
+    Route::get('tax-categories/datatable', 'Payroll\TaxCategoriesController@datatable');
+    Route::get('tax-categories', 'Payroll\TaxCategoriesController@index');
+
+    Route::get('computation-tables/{tableType}/datatable', 'Payroll\ComputationTablesController@datatable');
+    Route::get('computation-tables/{tableType}', 'Payroll\ComputationTablesController@index');
 });
 
 Route::group(['prefix' => 'security', 'namespace' => 'Modules\Security', 'middleware' => ['auth']], function () {
@@ -55,6 +61,7 @@ Route::group(['prefix' => 'HRIS', 'namespace' => 'Modules\HRIS\ESS', 'middleware
 
 //  HRIS
 Route::group(['prefix' => 'HRIS', 'namespace' => 'Modules\HRIS', 'middleware' => ['auth']], function () {
+    Route::get('employees/paginated-json', 'EmployeesController@getPaginatedJSON');
     Route::get('employees/datatable', 'EmployeesController@datatable');
     Route::delete('employees/{employeeCode}/effective-date/{effectiveDate}', 'EmployeesController@destroyWorkSchedule');
     Route::resource('employees', 'EmployeesController');
@@ -63,9 +70,18 @@ Route::group(['prefix' => 'HRIS', 'namespace' => 'Modules\HRIS', 'middleware' =>
     Route::resource('policies', 'PoliciesController');
 });
 
+//  Timekeeping
+Route::group(['prefix' => 'timekeeping', 'namespace' => 'Modules\Timekeeping', 'middleware' => ['auth']], function () {
+    Route::get('employee-time-entries/json', 'EmployeeTimeEntriesController@getJSON');
+    Route::post('employee-time-entries/import-excel', 'EmployeeTimeEntriesController@importFromExcel');
+    Route::resource('employee-time-entries', 'EmployeeTimeEntriesController');
+    Route::resource('employee-time-entry-corrections', 'EmployeeTimeEntryCorrectionController');
+});
+
 Route::group(['prefix' => 'payroll', 'namespace' => 'Modules\Payroll', 'middleware' => ['auth']], function () {
 
-    Route::get('payroll-items/{policyCode}/requires-employee-amount', 'PayrollItemsController@getRequiresEmployeeAmount');
+    Route::get('payroll-items/json', 'PayrollItemsController@getSelectableJSON');
+    Route::get('payroll-items/{policyCode}/requires-employee-amount', 'PayrollItemsController@getRequiresEmployeeAmountJSON');
 });
 
 Route::group(['prefix' => 'reports', 'namespace' => 'Modules\Reports', 'middleware' => ['auth']], function () {

@@ -5,9 +5,12 @@ namespace App\Models\HRIS;
 use App\Models\MasterFiles\Company;
 use App\Models\MasterFiles\Location;
 use App\Models\Payroll\TaxCategory;
+use App\Models\Searchable;
 use App\Models\SGModel;
 
 class Employee extends SGModel {
+
+    use Searchable;
 
     public $incrementing         = false;
     protected $table             = "hris.employee";
@@ -37,6 +40,18 @@ class Employee extends SGModel {
         "date_hired",
         "basic_salary",
         "basic_salary_uom"
+    ];
+    // </editor-fold>
+    //
+    /*     * ************************************************************************* */
+    // <editor-fold defaultstate="collapsed" desc="Searchable">
+
+    protected $searchable = [
+        "code",
+        "email",
+        "first_name",
+        "middle_name",
+        "last_name"
     ];
 
     // </editor-fold>

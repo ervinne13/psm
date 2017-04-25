@@ -5,16 +5,17 @@
 @section('vendor-js')
 
 <script src="{{vendor_url("underscore/underscore.js")}}"></script>
-<script src="{{vendor_url("autoNumeric/autoNumeric.js")}}"></script>
 
 @endsection
 
 @section('js')
 
-@include('pages.HRIS.policies.policy-payroll-item-row-form-template')
+@include('templates.default-dropdown-table-actions')
+@include('pages.HRIS.policies.policy-payroll-item-row-template')
 
 <script type="text/javascript">
 var policy = JSON.parse('{!! $policy !!}');
+var selectablePayrollItems = JSON.parse('{!! $selectablePayrollItems !!}');
 var mode = '{{$mode}}';
 </script>
 
@@ -22,6 +23,8 @@ var mode = '{{$mode}}';
 @endsection
 
 @section('content')
+
+@include('pages.HRIS.policies.add-payroll-item-modal')
 
 <div class="row m-b-2">
     <div class="col-md-4 col-sm-4 col-xs-4">
@@ -58,13 +61,34 @@ var mode = '{{$mode}}';
                                 <label class="control-label">Description</label>
                                 <textarea name="description" class="form-control" style="height: 180px;" tabindex="4"></textarea>
                             </div>      
-                        </div>
+                        </div>                        
+
                     </div>
 
-                    <div class="row">
-                        <table id="policy-payroll-item-table" class="table table-responsive">
+                    <hr>
 
-                        </table>
+                    <div class="row">
+                        <div class="col-md-12">
+                            
+                            <h4>Applicable Payroll Items</h4>
+                            
+                            <table id="policy-payroll-item-table" class="table table-responsive table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            <a href="#" id="action-add-payroll-items">
+                                                <i class="fa fa-plus"></i>
+                                            </a>
+                                        </th>
+                                        <th>Code</th>
+                                        <th>Name</th>
+                                        <th>Type</th>
+                                        <th>UOM</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>                      
                     </div>
 
                 </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Modules\Payroll;
 
 use App\Http\Controllers\Controller;
 use App\Models\HRIS\Policy;
+use App\Models\Payroll\PayrollItem;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -12,9 +13,24 @@ class PayrollItemsController extends Controller {
     /**     * *************************************************** */
     // <editor-fold defaultstate="collapsed" desc="API Functions">
 
-    public function getRequiresEmployeeAmount($policyCode) {
+    public function getRequiresEmployeeAmountJSON($policyCode) {
         $policy = Policy::find($policyCode);
         return $policy->payrollItems()->requiresEmployeeAmount()->get();
+    }
+
+    public function getSelectableJSON(Request $request) {
+        if ($request->policy_code) {
+            return PayrollItem::SelectableByPolicyCode($request->policy_code)->get();
+
+//            $payrollItems = PayrollItem::SelectableByPolicyCode($request->policy_code)->get();
+//            foreach($payrollItems  AS $payrollItem) {
+//                echo $payrollItem->display_name;
+//                echo "<br>";
+//                echo "\n";
+//            }
+        } else {
+            return PayrollItem::all();
+        }
     }
 
     // </editor-fold>    

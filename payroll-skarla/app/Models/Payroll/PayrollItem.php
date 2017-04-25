@@ -17,4 +17,11 @@ class PayrollItem extends SGModel {
         return $query->where("is_employee_amount_required", true);
     }
 
+    public function scopeSelectableByPolicyCode($query, $policyCode) {
+        return $query->leftJoin('hris.policy_payroll_item', 'payroll_item_code', '=', 'code')
+                        ->whereNull('policy_code')
+                        ->orWhere('policy_code', '!=', $policyCode)
+        ;
+    }
+
 }

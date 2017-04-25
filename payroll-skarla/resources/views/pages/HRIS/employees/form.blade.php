@@ -15,8 +15,8 @@
 @include('pages.HRIS.employees.form-parts.policy-payroll-item-row-template')
 
 <script type="text/javascript">
-var employee = JSON.parse('{!! $employee !!}');
 var mode = '{{$mode}}';
+var employee = {!! $employee !!}
 </script>
 
 <script src="{{url("js/view-presenters/HRIS/EmployeeWorkScheduleViewPresenter.js")}}"></script>

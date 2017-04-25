@@ -110,16 +110,16 @@ class DefaultRolesAndUsersSeeder extends Seeder {
     private function insertUserLocations() {
 
         $locations = [
-            ["username" => "dtumulak", "location_code" => "BLTMZR_HO", "is_default" => true],
-            ["username" => "yyao", "location_code" => "HYTORC_P_LG1", "is_default" => true],
-            ["username" => "atampus", "location_code" => "BLTMZR_HO", "is_default" => true],
-            ["username" => "lbatarao", "location_code" => "HYTORC_P_LG1", "is_default" => true],
-            ["username" => "lbatarao", "location_code" => "HYTORC_W_LG1", "is_default" => true],
-            ["username" => "ggarcia", "location_code" => "BLTMZR_HO", "is_default" => true],
-            ["username" => "ggarcia", "location_code" => "BLTMZR_B_HSQC", "is_default" => false],
-            ["username" => "ggarcia", "location_code" => "BLTMZR_P_QC1", "is_default" => false],
-            ["username" => "ggarcia", "location_code" => "BLTMZR_W_QC1", "is_default" => false],
-            ["username" => "ggarcia", "location_code" => "BLTMZR_W_QC2", "is_default" => false],
+            ["username" => "dtumulak", "location_code" => "AERO_HO", "is_default" => true],
+            ["username" => "yyao", "location_code" => "AERO_HO", "is_default" => true],
+            ["username" => "atampus", "location_code" => "AERO_HO", "is_default" => true],
+            ["username" => "lbatarao", "location_code" => "AERO_HO", "is_default" => true],
+            ["username" => "lbatarao", "location_code" => "AERO_B1", "is_default" => true],
+            ["username" => "lbatarao", "location_code" => "AERO_B2", "is_default" => true],
+            ["username" => "ggarcia", "location_code" => "AERO_B1", "is_default" => true],
+            ["username" => "ggarcia", "location_code" => "AERO_B2", "is_default" => false],
+            ["username" => "ggarcia", "location_code" => "AERO_RB1", "is_default" => false],
+            ["username" => "ggarcia", "location_code" => "AERO_RB2", "is_default" => false]
         ];
 
         UserLocation::insert($locations);

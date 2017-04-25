@@ -62,6 +62,7 @@ class DatabaseSeeder extends Seeder {
                 //
                 "user_location",
                 "location",
+                "cost_profit_center",
                 "company",
             ];
 

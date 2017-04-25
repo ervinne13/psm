@@ -20,13 +20,30 @@ SGFormatter.displayDateTime = function (dateTime) {
 };
 
 SGFormatter.displayDate = function (dateTime) {
-    return moment(dateTime, SGFormatter.SERVER_DATE_FORMAT)
-            .format(SGFormatter.DISPLAY_DATE_FORMAT);
+    if (dateTime) {
+        return moment(dateTime, SGFormatter.SERVER_DATE_FORMAT)
+                .format(SGFormatter.DISPLAY_DATE_FORMAT);
+    } else {
+        return "";
+    }
 };
 
 SGFormatter.displayTime = function (dateTime) {
-    return moment(dateTime, SGFormatter.SERVER_TIME_FORMAT)
-            .format(SGFormatter.DISPLAY_TIME_FORMAT);
+    if (dateTime) {
+        return moment(dateTime, SGFormatter.SERVER_TIME_FORMAT)
+                .format(SGFormatter.DISPLAY_TIME_FORMAT);
+    } else {
+        return "";
+    }
+};
+
+SGFormatter.convertToServerDate = function (dateTime) {
+    if (dateTime) {
+        return moment(dateTime, SGFormatter.DISPLAY_DATE_FORMAT)
+                .format(SGFormatter.SERVER_DATE_FORMAT);
+    } else {
+        return "";
+    }
 };
 
 SGFormatter.formatValue = function (value, displayFormat) {

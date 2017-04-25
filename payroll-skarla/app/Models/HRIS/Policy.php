@@ -17,8 +17,17 @@ class Policy extends SGModel {
         "code", "display_name", "description", "night_differential_start_time"
     ];
 
+    /**     * *********************************************************** */
+    // <editor-fold defaultstate="collapsed" desc="Relationships">
+
     public function payrollItems() {
         return $this->belongsToMany(PayrollItem::class, "hris.policy_payroll_item", "policy_code", "payroll_item_code");
     }
 
+    //  Pivot for payroll items
+    public function policyPayrollItems() {
+        return $this->hasMany(PolicyPayrollItem::class, "policy_code");
+    }
+
+    // </editor-fold>
 }

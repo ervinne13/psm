@@ -5,7 +5,7 @@ namespace App\Models;
 use App\Models\MasterFiles\Company;
 use App\Models\MasterFiles\Location;
 use App\Models\Security\Role;
-use App\Services\AccessControlList\ModuleACLService;
+use App\Payroll\Services\AccessControlList\ModuleACLService;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use function session;
